@@ -26,7 +26,7 @@
   gdtr的内容如上图所示，则我们可以查看此处的内存信息，分析gdt。
   ![alt text](.\images\2.png)
   通过上图我们可以获知，第二项为代码段，size为0x7FFFFF ，基地址为0。则实际段长度为8MB。第三项为数据段，size为0x7FFFFF ，基地址为0。则实际段长度为8MB。
-  ![alt text](.\images\3.png)
+  ![alt text](\images\3.png)
   通过ss的内容，我们可以得知ss指向gdt的第1项，也就是说此时堆栈段同内核数据段。
   <br>
   <br>
