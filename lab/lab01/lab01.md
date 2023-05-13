@@ -22,7 +22,7 @@
 
   2. 请记录 head.s 的内存分布状况，写明每个数据段，代码段，栈段的起始与终止的内存地址
    - 首先，我们将断点设至head.s的iret处，此时gdt的初始化已经完成，所以我们可以根据此时gdt的内容初步分析内存分布。
-  ![alt text](/images/1.png)
+  ![alt text](lab/lab01/images/1.png)
   gdtr的内容如上图所示，则我们可以查看此处的内存信息，分析gdt。
   ![alt text](2.png)
   通过上图我们可以获知，第二项为代码段，size为0x7FFFFF ，基地址为0。则实际段长度为8MB。第三项为数据段，size为0x7FFFFF ，基地址为0。则实际段长度为8MB。
