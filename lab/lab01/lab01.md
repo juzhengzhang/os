@@ -22,11 +22,11 @@
 
   2. 请记录 head.s 的内存分布状况，写明每个数据段，代码段，栈段的起始与终止的内存地址
    - 首先，我们将断点设至head.s的iret处，此时gdt的初始化已经完成，所以我们可以根据此时gdt的内容初步分析内存分布。
-  ![alt text](./images/1.png)
+  ![alt text](./images/1.png)<br>
   gdtr的内容如上图所示，则我们可以查看此处的内存信息，分析gdt。
-  ![alt text](./images/2.png)
+  ![alt text](./images/2.png)<br>
   通过上图我们可以获知，第二项为代码段，size为0x7FFFFF ，基地址为0。则实际段长度为8MB。第三项为数据段，size为0x7FFFFF ，基地址为0。则实际段长度为8MB。
-  ![alt text](./images/3.png)
+  ![alt text](./images/3.png)<br>
   通过ss的内容，我们可以得知ss指向gdt的第1项，也就是说此时堆栈段同内核数据段。
   <br>
   <br>
@@ -35,13 +35,13 @@
        
   
   - 然后，我们继续执行程序，此时应进入了任务0，我们查看ldtr，获取ldt的位置信息，查看ldt的内容。ldt的内容如下图所示。
-  ![alt text](./images/4.png)
+  ![alt text](./images/4.png)<br>
   根据分析可知，第二项是局部代码段描述符（s=1,type=1010），基地址为0，段限长为0x03ff。
   第三项是局部数据段描述符（s=1,type=0010），基地址为0，段限长为0x03ff。
   <br>
   <br>
   - 然后，我们进入任务1，查看ldt的内容如下图所示。
-  ![alt text](./images/task1_ldt.png)
+  ![alt text](./images/task1_ldt.png)<br>
   同任务1分析，代码段与数据段基地址均为0，段限长为0x03ff，实际长度为4MB。
   <br>
   <br>
@@ -78,26 +78,26 @@
 
 
   4. 简述 iret 执行后， pc 如何找到下一条指令？
-   ![alt text](./images/re_before_iret.png)
+   ![alt text](./images/re_before_iret.png)<br>
    在iret执行前，cs的值为0008，然后执行iret。
-   ![alt text](./images/re_after_iret.png)
+   ![alt text](./images/re_after_iret.png)<br>
    如上图所示，iret执行后，栈中的内容被放至各个相应的寄存器，cs和eip的内容被修改，从而获得了下一条指令的地址。
    <br>
   5. 记录 iret 执行前后，栈是如何变化的？
    执行前栈的情况为：
-    ![alt text](./images/stack_before.png)
+    ![alt text](./images/stack_before.png)<br>
     <br>
     执行后栈的情况为：
-    ![alt text](./images/stack_after.png)
+    ![alt text](./images/stack_after.png)<br>
     <br>
     可以看出，执行后的栈比执行前的栈正好少5项,并且0xBC4以及0XBC8的内容正好可以与第4题中iret指令执行后的eip，cs对应上，也验证了我们第四题的答案。
     <br>
   6. 当任务进行系统调用时，即 int 0x80 时，记录栈的变化情况。
    调用int 0x80前:
-   ![alt text](./images/int_be.png)
+   ![alt text](./images/int_be.png)<br>
    <br>
    调用int 0x80后:
-   ![alt text](./images/int_af.png)
+   ![alt text](./images/int_af.png)<br>
    由于执行前后任务的特权级不同(从cs可以看出)，所以进行了栈切换。ss寄存器的值发生了相应变化。
 
 
@@ -110,4 +110,4 @@
 
 
 
-![alt text](.\images\bing.jpg)
+![alt text](.\images\bing.jpg)<br>
